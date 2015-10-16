@@ -19,12 +19,7 @@ public class Busca {
     // testa a solução
     public boolean testeObjetivo(int[] base) {
         int objetivo[] = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 0};
-
-        //for (int i = 0; i < 9; i++) {
-        if (Arrays.equals(base, objetivo))
-            return true;
-        //}
-        return false;
+        return Arrays.equals(base, objetivo);
     }
 
     // localiza a posição do 0
@@ -36,7 +31,7 @@ public class Busca {
         return 9;
     }
 
-    // grupo de ações possivéis para cada estado
+    // grupo de ações possivéis para cada estado v2
     public void sucessor(No aux) {
         int index = pos_0(aux);
         int posX = index % 3;
@@ -60,52 +55,6 @@ public class Busca {
                 pilha_fila.add(movRight(aux, index));
         } else
             pilha_fila.add(movRight(aux, index));
-        /*
-        switch (index) {
-            case 0:
-                pilha_fila.add(movUP(aux, index));
-                pilha_fila.add(movLeft(aux, index));
-                break;
-            case 1:
-                pilha_fila.add(movRight(aux, index));
-                pilha_fila.add(movUP(aux, index));
-                pilha_fila.add(movLeft(aux, index));
-                break;
-            case 2:
-                pilha_fila.add(movRight(aux, index));
-                pilha_fila.add(movUP(aux, index));
-                break;
-            case 3:
-                pilha_fila.add(movDown(aux, index));
-                pilha_fila.add(movUP(aux, index));
-                pilha_fila.add(movLeft(aux, index));
-                break;
-            case 4:
-                pilha_fila.add(movRight(aux, index));
-                pilha_fila.add(movDown(aux, index));
-                pilha_fila.add(movUP(aux, index));
-                pilha_fila.add(movLeft(aux, index));
-                break;
-            case 5:
-                pilha_fila.add(movRight(aux, index));
-                pilha_fila.add(movDown(aux, index));
-                pilha_fila.add(movUP(aux, index));
-                break;
-            case 6:
-                pilha_fila.add(movDown(aux, index));
-                pilha_fila.add(movLeft(aux, index));
-                break;
-            case 7:
-                pilha_fila.add(movRight(aux, index));
-                pilha_fila.add(movDown(aux, index));
-                pilha_fila.add(movLeft(aux, index));
-                break;
-            case 8:
-                pilha_fila.add(movRight(aux, index));
-                pilha_fila.add(movDown(aux, index));
-                break;
-        }
-        */
     }
 
     // conjunto de metodos de movimentos
