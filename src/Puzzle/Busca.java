@@ -59,47 +59,48 @@ public class Busca {
 
     // conjunto de metodos de movimentos
     public No movUP(No pai, int i) {
-        No novo = new No(pai.estado.clone(), "up", pai, pai.custocaminho + 1, pai.profundidade + 1, i);
+        No novo = new No(pai.estado.clone(), "up", pai, pai.custocaminho + 1, i);
         novo.estado[i] = pai.estado[i + 3];
         novo.estado[i + 3] = 0;
         return novo;
     }
 
     public No movDown(No pai, int i) {
-        No novo = new No(pai.estado.clone(), "down", pai, pai.custocaminho + 1, pai.profundidade + 1, i);
+        No novo = new No(pai.estado.clone(), "down", pai, pai.custocaminho + 1, i);
         novo.estado[i] = pai.estado[i - 3];
         novo.estado[i - 3] = 0;
         return novo;
     }
 
     public No movLeft(No pai, int i) {
-        No novo = new No(pai.estado.clone(), "left", pai, pai.custocaminho + 1, pai.profundidade + 1, i);
+        No novo = new No(pai.estado.clone(), "left", pai, pai.custocaminho + 1, i);
         novo.estado[i] = pai.estado[i + 1];
         novo.estado[i + 1] = 0;
         return novo;
     }
 
     public No movRight(No pai, int i) {
-        No novo = new No(pai.estado.clone(), "right", pai, pai.custocaminho + 1, pai.profundidade + 1, i);
+        No novo = new No(pai.estado.clone(), "right", pai, pai.custocaminho + 1, i);
         novo.estado[i] = pai.estado[i - 1];
         novo.estado[i - 1] = 0;
         return novo;
     }
 
-    // busca em profundidade com limite
+
+    // busca em heuristic com limite
     public No buscaProfLimit(No raiz) {
         pilha_fila.add(raiz);
         while (pilha_fila.size() != 0) {
             No aux = pilha_fila.remove(pilha_fila.size() - 1);
             if (testeObjetivo(aux.estado))
                 return aux;
-            else if (aux.profundidade < limite)
+            else if (aux.heuristic < limite)
                 sucessor(aux);
         }
         return raiz;
     }
 
-    // busca em profundidade
+    // busca em heuristic
     public No buscaProf(No raiz) {
         pilha_fila.add(raiz);
         while (pilha_fila.size() != 0) {
@@ -123,5 +124,26 @@ public class Busca {
                 sucessor(aux);
         }
         return raiz;
+    }
+
+    public No buscaHeuristica(No raiz) {
+        int distance = raiz.heuristic;
+        No busca = raiz;
+        pilha_fila.add(raiz);
+        while (distance != 0) {
+            while (pilha_fila.size() != 0) {
+                No aux = pilha_fila.remove(0);
+                System.out.println(aux.heuristic);
+                aux.printEstado();
+                if (aux.heuristic == 0)
+                    return aux;
+                else// if (aux.heuristic <= distance)
+                    busca = aux;
+            }
+            sucessor(busca);
+        }
+        System.out.println(busca.heuristic);
+
+        return busca;
     }
 }

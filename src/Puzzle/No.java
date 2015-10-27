@@ -11,18 +11,18 @@ public class No {
     String acao;
     No pai;
     int custocaminho;
-    int profundidade;
+    int heuristic;
     int pos_ant;
 
     public No() {
     }
 
-    public No(int[] estado, String acao, No pai, int custocaminho, int profundidade, int pos_ant) {
+    public No(int[] estado, String acao, No pai, int custocaminho, int pos_ant) {
         this.estado = estado;
         this.acao = acao;
         this.pai = pai;
         this.custocaminho = custocaminho;
-        this.profundidade = profundidade;
+        this.heuristic = getHeuristic(estado);
         this.pos_ant = pos_ant;
     }
 
@@ -33,5 +33,18 @@ public class No {
                 System.out.println();
         }
         System.out.println();
+    }
+
+    public int getHeuristic() {
+        return getHeuristic(this.estado);
+    }
+
+    public int getHeuristic(int[] array) {
+        int heuristic = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] != 0)
+                heuristic += Math.abs((i / 3) - ((array[i] - 1) / 3)) + Math.abs((i % 3) - ((array[i] - 1) % 3));
+        }
+        return heuristic;
     }
 }
