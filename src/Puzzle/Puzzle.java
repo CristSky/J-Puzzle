@@ -25,8 +25,8 @@ public class Puzzle {
         //int iniciar[] = new int[]{1, 2, 3, 7, 0, 8, 6, 4, 5}; //10
         //int iniciar[] = new int[]{2, 6, 3, 1, 7, 8, 4, 5, 0}; //12
         //int iniciar[] = new int[]{1, 3, 0, 2, 6, 5, 4, 7, 8}; //12
-        //int iniciar[] = new int[]{0, 3, 6, 2, 1, 7, 4, 8, 5}; //14
-        int iniciar[] = new int[]{0, 2, 3, 7, 4, 1, 8, 6, 5}; //14
+        int iniciar[] = new int[]{0, 3, 6, 2, 1, 7, 4, 8, 5}; //14
+        //int iniciar[] = new int[]{0, 2, 3, 7, 4, 1, 8, 6, 5}; //14
         //int iniciar[] = new int[]{2, 8, 3, 5, 0, 6, 1, 4, 7}; //14
         //int iniciar[] = new int[]{7, 4, 1, 8, 3, 2, 0, 5, 6}; //14
         //int iniciar[] = new int[]{3, 5, 0, 2, 1, 7, 8, 4, 6}; //16
@@ -47,7 +47,7 @@ public class Puzzle {
         System.out.println("2- Busca em Profundidade Limitada");
         System.out.println("3- Busca em Profundidade");
         opcao = 1;//scan.nextInt();
-
+        long startTime = System.currentTimeMillis();
         switch (opcao) {
             case 1:
                 aux = find.buscaHeuristica(raiz);
@@ -72,10 +72,12 @@ public class Puzzle {
         arvore.add(aux); // <- raiz
 
         // imprime o caminho da solução
-        System.out.println("Solução");
+        long endTime = System.currentTimeMillis();
+        System.out.printf("Solução #time: %d ms\n", endTime - startTime);
+
         while (arvore.size() != 0) {
             aux = arvore.remove(arvore.size() - 1);
-            System.out.println(aux.custocaminho + " " + aux.acao);
+            System.out.println(aux.g + " " + aux.acao);
         }
     }
 }

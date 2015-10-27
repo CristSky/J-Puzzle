@@ -10,19 +10,19 @@ public class No {
     int estado[] = new int[9];
     String acao;
     No pai;
-    int custocaminho;
-    int heuristic;
+    int g;
+    int h;
     int pos_ant;
 
     public No() {
     }
 
-    public No(int[] estado, String acao, No pai, int custocaminho, int pos_ant) {
+    public No(int[] estado, String acao, No pai, int g, int pos_ant) {
         this.estado = estado;
         this.acao = acao;
         this.pai = pai;
-        this.custocaminho = custocaminho;
-        this.heuristic = getHeuristic(estado);
+        this.g = g;
+        this.h = getHeuristic(estado);
         this.pos_ant = pos_ant;
     }
 
@@ -35,10 +35,15 @@ public class No {
         System.out.println();
     }
 
-    public int getHeuristic() {
+    public int getH() {
         return getHeuristic(this.estado);
     }
 
+    public int getGH() {
+        return this.g + this.h;
+    }
+
+    // Algoritmo Manhattan distances
     public int getHeuristic(int[] array) {
         int heuristic = 0;
         for (int i = 0; i < array.length; i++) {

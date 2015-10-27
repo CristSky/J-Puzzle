@@ -59,48 +59,48 @@ public class Busca {
 
     // conjunto de metodos de movimentos
     public No movUP(No pai, int i) {
-        No novo = new No(pai.estado.clone(), "up", pai, pai.custocaminho + 1, i);
+        No novo = new No(pai.estado.clone(), "up", pai, pai.g + 1, i);
         novo.estado[i] = pai.estado[i + 3];
         novo.estado[i + 3] = 0;
         return novo;
     }
 
     public No movDown(No pai, int i) {
-        No novo = new No(pai.estado.clone(), "down", pai, pai.custocaminho + 1, i);
+        No novo = new No(pai.estado.clone(), "down", pai, pai.g + 1, i);
         novo.estado[i] = pai.estado[i - 3];
         novo.estado[i - 3] = 0;
         return novo;
     }
 
     public No movLeft(No pai, int i) {
-        No novo = new No(pai.estado.clone(), "left", pai, pai.custocaminho + 1, i);
+        No novo = new No(pai.estado.clone(), "left", pai, pai.g + 1, i);
         novo.estado[i] = pai.estado[i + 1];
         novo.estado[i + 1] = 0;
         return novo;
     }
 
     public No movRight(No pai, int i) {
-        No novo = new No(pai.estado.clone(), "right", pai, pai.custocaminho + 1, i);
+        No novo = new No(pai.estado.clone(), "right", pai, pai.g + 1, i);
         novo.estado[i] = pai.estado[i - 1];
         novo.estado[i - 1] = 0;
         return novo;
     }
 
 
-    // busca em heuristic com limite
+    // busca em h com limite
     public No buscaProfLimit(No raiz) {
         pilha_fila.add(raiz);
         while (pilha_fila.size() != 0) {
             No aux = pilha_fila.remove(pilha_fila.size() - 1);
             if (testeObjetivo(aux.estado))
                 return aux;
-            else if (aux.heuristic < limite)
+            else if (aux.h < limite)
                 sucessor(aux);
         }
         return raiz;
     }
 
-    // busca em heuristic
+    // busca em h
     public No buscaProf(No raiz) {
         pilha_fila.add(raiz);
         while (pilha_fila.size() != 0) {
@@ -127,22 +127,28 @@ public class Busca {
     }
 
     public No buscaHeuristica(No raiz) {
-        int distance = raiz.heuristic;
+        int distance = raiz.h;
         No busca = raiz;
         pilha_fila.add(raiz);
         while (distance != 0) {
-            while (pilha_fila.size() != 0) {
+            while (!pilha_fila.isEmpty()) {
                 No aux = pilha_fila.remove(0);
-                System.out.println(aux.heuristic);
+
+                System.out.printf("%d %d\n\n", aux.h, aux.g);
+                System.out.printf("\n######### %d #########\n\n", distance);
                 aux.printEstado();
-                if (aux.heuristic == 0)
+                if (aux.h == 0)
                     return aux;
-                else// if (aux.heuristic <= distance)
-                    busca = aux;
+                else if (aux.h < distance) {
+                    distance = aux.h;
+                    System.out.printf("\n######### %d #########\n\n", aux.h);
+                    pilha_fila.add(0, aux);
+                }
+                sucessor(aux);
             }
-            sucessor(busca);
+
         }
-        System.out.println(busca.heuristic);
+        System.out.println(busca.h);
 
         return busca;
     }
