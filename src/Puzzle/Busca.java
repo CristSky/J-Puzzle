@@ -14,7 +14,7 @@ import java.util.PriorityQueue;
 
 public class Busca {
     LinkedList<No> list = new LinkedList<>();
-    PriorityQueue<Integer> queue = new PriorityQueue();
+    PriorityQueue<No> queue = new PriorityQueue();
 
     int limite = 30;
 
@@ -92,42 +92,19 @@ public class Busca {
         //genStates(raiz);
         int distance = raiz.getGH();
         No busca = raiz;
-        list.add(raiz);
+        queue.add(raiz);
+
         while (distance != 0) {
 
-            States.genStates(raiz, list);
-            //genStates(raiz);
-            System.out.println(list.size());
+            States.genStates(raiz, queue);
 
-            for (int no : raiz.estado)
-                    queue.add(no);
+            //for (No no : queue)
+            //        queue.add(no);
 
-            //for (int i = 0; i < list.size(); i++) {
-                System.out.println("-------------------------");
-                System.out.println(queue);
-                System.out.println("-------------------------");
-            //}
+
 
             //while (!list.isEmpty()) {
 
-
-
-                /*
-                No aux = list.remove(0);
-
-                System.out.printf("%d %d\n\n", aux.h, aux.g);
-                System.out.printf("\n######### %d #########\n\n", distance);
-                aux.printEstado();
-                if (aux.h == 0)
-                    return aux;
-                else if (aux.h < distance) {
-                    distance = aux.h;
-                    System.out.printf("\n######### %d #########\n\n", aux.h);
-                    list.add(0, aux);
-                }
-                genStates(aux);
-                */
-            //}
             break;
         }
         System.out.println(busca.h);
