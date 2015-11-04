@@ -6,7 +6,7 @@ package Puzzle;
  * Rafael Anselmo RA 525650
  * Melisa Cordeiro RA 532533
  */
-public class No {
+public class No implements Comparable<No> {
     int estado[] = new int[9];
     String acao;
     No pai;
@@ -22,7 +22,6 @@ public class No {
         this.acao = acao;
         this.pai = pai;
         this.g = g;
-        this.h = getHeuristic(estado);
         this.pos_ant = pos_ant;
     }
 
@@ -36,20 +35,23 @@ public class No {
     }
 
     public int getH() {
-        return getHeuristic(this.estado);
+        return this.h;
+    }
+
+    public void setH(int h) {
+        this.h = h;
     }
 
     public int getGH() {
         return this.g + this.h;
     }
 
-    // Algoritmo Manhattan distances
-    public int getHeuristic(int[] array) {
-        int heuristic = 0;
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] != 0)
-                heuristic += Math.abs((i / 3) - ((array[i] - 1) / 3)) + Math.abs((i % 3) - ((array[i] - 1) % 3));
+    @Override
+    public int compareTo(No o) {
+        if(this.h < o.h) {
+            return 1;
         }
-        return heuristic;
+        return 0;
     }
+
 }

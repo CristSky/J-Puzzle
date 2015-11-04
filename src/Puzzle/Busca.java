@@ -11,15 +11,37 @@ package Puzzle;
 import java.util.Arrays;
 import java.util.List;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 
 public class Busca {
     List<No> pilha_fila = new LinkedList<>();
+    PriorityQueue<No> queue = new PriorityQueue();
     int limite = 30;
 
     // testa a solução
     public boolean testeObjetivo(int[] base) {
         int objetivo[] = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 0};
         return Arrays.equals(base, objetivo);
+    }
+
+    // H1 - peças fora do lugar
+    public int misplacedTiles(int[] array) {
+        int heuristic = 0;
+        for (int i = 0; i < array.length; i++) {
+            if ((i != (array[i] - 1)) && (array[i] != 0))
+                heuristic++;
+        }
+        return heuristic;
+    }
+
+    // H2 - Algoritmo Manhattan distances
+    public int manhattanDistance(int[] array) {
+        int heuristic = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] != 0)
+                heuristic += Math.abs((i / 3) - ((array[i] - 1) / 3)) + Math.abs((i % 3) - ((array[i] - 1) % 3));
+        }
+        return heuristic;
     }
 
     // localiza a posição do 0
@@ -90,7 +112,7 @@ public class Busca {
     // busca em h com limite
     public No buscaProfLimit(No raiz) {
         pilha_fila.add(raiz);
-        while (pilha_fila.size() != 0) {
+        while (!pilha_fila.isEmpty()) {
             No aux = pilha_fila.remove(pilha_fila.size() - 1);
             if (testeObjetivo(aux.estado))
                 return aux;
@@ -103,7 +125,7 @@ public class Busca {
     // busca em h
     public No buscaProf(No raiz) {
         pilha_fila.add(raiz);
-        while (pilha_fila.size() != 0) {
+        while (!pilha_fila.isEmpty()) {
             No aux = pilha_fila.remove(pilha_fila.size() - 1);
             if (testeObjetivo(aux.estado))
                 return aux;
@@ -116,7 +138,7 @@ public class Busca {
     // busca em largura
     public No buscaLargura(No raiz) {
         pilha_fila.add(raiz);
-        while (pilha_fila.size() != 0) {
+        while (!pilha_fila.isEmpty()) {
             No aux = pilha_fila.remove(0);
             if (testeObjetivo(aux.estado))
                 return aux;
@@ -126,7 +148,12 @@ public class Busca {
         return raiz;
     }
 
-    public No buscaHeuristica(No raiz) {
+    public No aStar (No raiz, int op) {
+        if(op == 1)
+            raiz.setH(misplacedTiles(raiz.estado));
+        else
+            raiz.setH(manhattanDistance(raiz.estado));
+
         int distance = raiz.h;
         No busca = raiz;
         pilha_fila.add(raiz);
