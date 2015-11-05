@@ -1,8 +1,6 @@
 package Puzzle;
 
 import java.util.LinkedList;
-import java.util.List;
-import java.util.PriorityQueue;
 import java.util.Scanner;
 
 /**
@@ -14,16 +12,16 @@ import java.util.Scanner;
 
 public class Puzzle {
     public static void main(String[] args) {
-        List<No> arvore = new LinkedList<>();
+        LinkedList<No> arvore = new LinkedList<>();
         Busca find = new Busca();
-        Scanner scan = new Scanner(System.in);
-        int opcao;
+        Scanner input = new Scanner(System.in);
+        int opcao, opcaoH = 0;
 
         // Teste com custo da solução //#
         //int iniciar[] = new int[]{1, 2, 3, 4, 5, 6, 0, 7, 8}; //2
         //int iniciar[] = new int[]{1, 5, 2, 4, 0, 3, 7, 8, 6}; //4
         //int iniciar[] = new int[]{0, 2, 3, 1, 7, 5, 8, 4, 6}; //8
-        int iniciar[] = new int[]{1, 2, 3, 7, 0, 8, 6, 4, 5}; //10
+        //int iniciar[] = new int[]{1, 2, 3, 7, 0, 8, 6, 4, 5}; //10
         //int iniciar[] = new int[]{2, 6, 3, 1, 7, 8, 4, 5, 0}; //12
         //int iniciar[] = new int[]{1, 3, 0, 2, 6, 5, 4, 7, 8}; //12
         //int iniciar[] = new int[]{0, 3, 6, 2, 1, 7, 4, 8, 5}; //14
@@ -36,11 +34,11 @@ public class Puzzle {
         //int iniciar[] = new int[]{3, 4, 5, 8, 0, 6, 7, 1, 2}; //22
         //int iniciar[] = new int[]{0, 8, 6, 1, 7, 5, 2, 4, 3}; //24
         //int iniciar[] = new int[]{0, 8, 3, 7, 5, 2, 4, 6, 1}; //26
-        //int iniciar[] = new int[]{6, 8, 7, 1, 4, 5, 0, 2, 3}; //28
+        int iniciar[] = new int[]{6, 8, 7, 1, 4, 5, 0, 2, 3}; //28
         //int iniciar[] = new int[]{5, 2, 1, 3, 0, 4, 6, 8, 7}; //30
 
 
-        No raiz = new No(iniciar, "raiz", null, 0, 0, 9);
+        No raiz = new No(iniciar, "raiz", null, 0, 9);
         No aux = new No();
 
         System.out.println("+++++++++++++++++++++++++++");
@@ -50,27 +48,32 @@ public class Puzzle {
         System.out.println("4- Busca GME");
         System.out.println("5- Busca A*");
 
-        opcao = 1;//scan.nextInt();
+        opcao = 5;//input.nextInt();
+        if (opcao > 3) {
+            while (opcaoH < 1 || opcaoH > 2) {
+                System.out.println("1- H1 - misplacedTiles");
+                System.out.println("2- H2 - manhattanDistance");
+                opcaoH = 2;//input.nextInt();
+            }
+        }
+
         long startTime = System.currentTimeMillis();
+
         switch (opcao) {
             case 1:
                 aux = find.buscaLargura(raiz);
                 break;
             case 2:
-                aux = find.buscaProfLimit(raiz);
+                aux = find.buscaIDA(raiz);
                 break;
             case 3:
                 aux = find.buscaProf(raiz);
                 break;
             case 4:
-                //---
+                //TODO busca GME
                 break;
             case 5:
-                System.out.println("1- H1 - misplacedTiles");
-                System.out.println("2- H2 - manhattanDistance");
-                opcao = 2;//scan.nextInt();
-
-                aux = find.aStar(raiz, opcao);
+                aux = find.aStar(raiz, opcaoH);
                 break;
         }
 
