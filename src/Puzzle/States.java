@@ -2,13 +2,6 @@ package Puzzle;
 
 import java.util.AbstractCollection;
 
-/**
- * Cristiano Vicente RA 443913
- * Claudio Roberto Costa RA 527033
- * Rafael Anselmo RA 525650
- * Melisa Cordeiro RA 532533
- */
-
 public class States {
     public static void genStates(No aux, AbstractCollection<No> list) {
         genStates(aux, list, 0);
