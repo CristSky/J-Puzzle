@@ -3,13 +3,6 @@ package Puzzle;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-/**
- * Cristiano Vicente RA 443913
- * Claudio Roberto Costa RA 527033
- * Rafael Anselmo RA 525650
- * Melisa Cordeiro RA 532533
- */
-
 public class Puzzle {
     public static void main(String[] args) {
         LinkedList<No> arvore = new LinkedList<>();
