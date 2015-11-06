@@ -1,10 +1,3 @@
-/**
- * Cristiano Vicente RA 443913
- * Claudio Roberto Costa RA 527033
- * Rafael Anselmo RA 525650
- * Melisa Cordeiro RA 532533
- */
-
 package Puzzle;
 
 
