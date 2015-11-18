@@ -20,9 +20,9 @@ public class Puzzle {
         //int iniciar[] = new int[]{1, 3, 0, 2, 6, 5, 4, 7, 8}; //12
         //int iniciar[] = new int[]{0, 3, 6, 2, 1, 7, 4, 8, 5}; //14
         //int iniciar[] = new int[]{0, 2, 3, 7, 4, 1, 8, 6, 5}; //14
-        int iniciar[] = new int[]{2, 8, 3, 5, 0, 6, 1, 4, 7}; //14
+        //int iniciar[] = new int[]{2, 8, 3, 5, 0, 6, 1, 4, 7}; //14
         //int iniciar[] = new int[]{7, 4, 1, 8, 3, 2, 0, 5, 6}; //14
-        //int iniciar[] = new int[]{3, 5, 0, 2, 1, 7, 8, 4, 6}; //16
+        int iniciar[] = new int[]{3, 5, 0, 2, 1, 7, 8, 4, 6}; //16
         //int iniciar[] = new int[]{1, 5, 4, 8, 6, 2, 0, 7, 3}; //18
         //int iniciar[] = new int[]{4, 5, 3, 2, 0, 1, 7, 6, 8}; //20
         //int iniciar[] = new int[]{3, 4, 5, 8, 0, 6, 7, 1, 2}; //22
